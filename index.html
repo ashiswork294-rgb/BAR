@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#162c25">
+  <title>BarReady — Bar Exam Study Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">§</div><div><strong>BarReady</strong><span>YOUR BAR EXAM HQ</span></div></div>
+      <div class="sidebar-label">YOUR WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-item active" data-page="dashboard"><span>◫</span> Overview</button>
+        <button class="nav-item" data-page="timer"><span>◷</span> Study timers</button>
+        <button class="nav-item" data-page="analytics"><span>▥</span> Study analytics</button>
+        <button class="nav-item" data-page="subjects"><span>§</span> Subjects</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="spark">✦</span><p>One focused session at a time. You’re building the practice, not just counting the days.</p></div>
+        <div class="local-note">PRIVATE BY DESIGN <span>•</span> SAVED ON THIS DEVICE</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow" id="todayLabel">YOUR STUDY SPACE</div><h1 id="pageTitle">Overview</h1></div>
+        <div class="top-actions"><div class="live-pill"><span></span> YOUR NEXT CHAPTER STARTS NOW</div><button class="icon-button" id="resetAllBtn" title="Reset all data" aria-label="Reset all data">↺</button></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="hero-kicker"><span>✦</span> THE COUNTDOWN IS ON</div>
+            <h2>Study today.<br><em>Stand ready tomorrow.</em></h2>
+            <p>Your future in law is built in the hours you put in now. Show up for this session.</p>
+            <div class="hero-actions"><button class="button button-light" data-go="timer">Start a study session <span>↗</span></button><span class="hero-micro">SMALL STEPS. SERIOUS PROGRESS.</span></div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-label">YOUR BAR EXAM BEGINS IN</div>
+            <div class="countdown-number"><span id="daysLeft">44</span><small> DAYS</small></div>
+            <div class="countdown-date">12–13 DECEMBER 2026</div>
+            <div class="countdown-rule"><span></span></div>
+            <div class="countdown-foot"><span>◷</span> Every focused minute counts.</div>
+          </div>
+          <div class="hero-decoration">§</div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>TODAY’S STUDY TIME</span><span class="stat-icon green">◷</span></div><div class="stat-value" id="todayTotal">00h 00m</div><div class="stat-sub">Logged study time across all subjects</div></article>
+          <article class="stat-card"><div class="stat-top"><span>THIS WEEK</span><span class="stat-icon gold">▥</span></div><div class="stat-value" id="weekTotal">00h 00m</div><div class="stat-sub">Your last 7 days of effort</div></article>
+          <article class="stat-card"><div class="stat-top"><span>ALL-TIME STUDY</span><span class="stat-icon lilac">✦</span></div><div class="stat-value" id="allTotal">00h 00m</div><div class="stat-sub">Every minute you’ve recorded</div></article>
+          <article class="stat-card"><div class="stat-top"><span>STUDY DAYS</span><span class="stat-icon blue">✓</span></div><div class="stat-value" id="studyDays">0 <small>days</small></div><div class="stat-sub">Days with recorded study time</div></article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel chart-panel">
+            <div class="panel-heading"><div><div class="eyebrow">CONSISTENCY OVER INTENSITY</div><h3>Your study rhythm</h3></div><button class="text-button" data-go="analytics">View analytics ↗</button></div>
+            <div class="chart-legend"><span><i></i> Hours studied</span><span id="chartRange">Last 7 days</span></div>
+            <div id="weeklyChart" class="bar-chart" aria-label="Study hours for the last seven days"></div>
+          </article>
+          <article class="panel quote-panel">
+            <div class="quote-mark">“</div><div class="eyebrow">A NOTE FOR THE JOURNEY</div>
+            <blockquote id="quoteText">The secret of getting ahead is getting started.</blockquote>
+            <div class="quote-author" id="quoteAuthor">— Mark Twain · commonly attributed</div>
+            <div class="quote-divider"></div>
+            <div class="quote-bottom"><span>✦</span><p>Come back to this: you don’t need a perfect day. You need to begin.</p></div>
+            <div class="quote-controls"><button id="prevQuote" aria-label="Previous quote">←</button><span id="quoteCount">01 / 06</span><button id="nextQuote" aria-label="Next quote">→</button></div>
+          </article>
+        </div>
+
+        <div class="bottom-grid">
+          <article class="panel subject-summary">
+            <div class="panel-heading"><div><div class="eyebrow">WHERE YOUR TIME GOES</div><h3>Today by subject</h3></div><button class="text-button" data-go="subjects">Manage subjects ↗</button></div>
+            <div id="todaySubjects" class="subject-list"></div>
+          </article>
+          <article class="panel quick-panel">
+            <div class="eyebrow">MAKE THIS SESSION COUNT</div><h3>Ready when you are.</h3><p>Choose a subject, start the clock, and let the minutes add up automatically.</p>
+            <button class="button button-dark" data-go="timer">Open study timers <span>↗</span></button>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="page-timer">
+        <div class="page-intro"><div><div class="eyebrow">FOCUS ON WHAT YOU CAN CONTROL</div><h2>Study timers</h2><p>Pomodoro or stopwatch — every minute you study is counted, even if you stop early.</p></div><div class="today-chip">TODAY <strong id="timerTodayTotal">00h 00m</strong></div></div>
+        <div class="timer-layout">
+          <article class="panel timer-panel">
+            <div class="mode-tabs"><button class="mode-tab active" data-mode="pomodoro">Pomodoro</button><button class="mode-tab" data-mode="stopwatch">Study stopwatch</button></div>
+            <div id="pomodoroArea">
+              <div class="duration-options"><button class="duration-btn active" data-minutes="25">25 min <small>Pomodoro</small></button><button class="duration-btn" data-minutes="50">50 min <small>Deep focus</small></button><button class="duration-btn" data-minutes="custom">Custom <small>Set your time</small></button></div>
+              <div id="customTimeRow" class="custom-time-row hidden"><label for="customMinutes">Custom minutes</label><input id="customMinutes" type="number" min="1" max="600" value="35"><button class="button button-outline" id="applyCustom">Apply</button></div>
+              <div class="timer-ring-wrap"><div class="timer-ring" id="timerRing"><div class="timer-inner"><div class="timer-state" id="timerState">READY TO FOCUS</div><div class="timer-display" id="timerDisplay">25:00</div><div class="timer-sub" id="timerSub">25-minute session</div></div></div></div>
+              <div class="timer-controls"><button class="button button-dark" id="startPauseBtn">▶ Start focus</button><button class="button button-outline" id="resetTimerBtn">↺ Reset</button></div>
+              <p class="timer-hint">Your study log updates when you pause, reset, or finish. You never lose an unfinished session.</p>
+            </div>
+            <div id="stopwatchArea" class="hidden">
+              <div class="timer-ring-wrap"><div class="timer-ring stopwatch-ring"><div class="timer-inner"><div class="timer-state" id="stopwatchState">READY WHEN YOU ARE</div><div class="timer-display" id="stopwatchDisplay">00:00:00</div><div class="timer-sub">Open-ended study session</div></div></div></div>
+              <div class="timer-controls"><button class="button button-dark" id="stopwatchStartBtn">▶ Start studying</button><button class="button button-outline" id="stopwatchResetBtn">↺ Stop & save</button></div>
+              <p class="timer-hint">Pause or stop any time. The elapsed time is added to today’s subject total.</p>
+            </div>
+          </article>
+          <aside class="timer-side">
+            <article class="panel session-panel"><div class="eyebrow">SESSION DETAILS</div><h3>What are you studying?</h3><label for="activeSubject">Subject</label><select id="activeSubject"></select><div class="session-divider"></div><div class="session-metric"><span>Time logged today</span><strong id="subjectTodayTime">00h 00m</strong></div><div class="session-metric"><span>Selected subject</span><strong id="selectedSubjectName">—</strong></div><div class="session-tip"><span>✦</span><p>Tip: put your phone away, set one clear goal, and begin.</p></div></article>
+            <article class="panel recent-panel"><div class="panel-heading"><div><div class="eyebrow">YOUR MOMENTUM</div><h3>Recent sessions</h3></div></div><div id="recentSessions" class="recent-list"></div></article>
+          </aside>
+        </div>
+      </section>
+
+      <section class="page" id="page-analytics">
+        <div class="page-intro"><div><div class="eyebrow">PROGRESS YOU CAN SEE</div><h2>Study analytics</h2><p>Use the data to notice your habits, celebrate consistency, and adjust your plan.</p></div></div>
+        <div class="stats-grid analytics-stats"><article class="stat-card"><div class="stat-top"><span>TOTAL TIME</span><span class="stat-icon green">◷</span></div><div class="stat-value" id="analyticsAll">00h 00m</div><div class="stat-sub">All recorded sessions</div></article><article class="stat-card"><div class="stat-top"><span>DAILY AVERAGE</span><span class="stat-icon gold">⌁</span></div><div class="stat-value" id="dailyAverage">00m</div><div class="stat-sub">Across days you studied</div></article><article class="stat-card"><div class="stat-top"><span>BEST DAY</span><span class="stat-icon lilac">✦</span></div><div class="stat-value" id="bestDay">—</div><div class="stat-sub" id="bestDaySub">Your personal high</div></article><article class="stat-card"><div class="stat-top"><span>SESSIONS LOGGED</span><span class="stat-icon blue">✓</span></div><div class="stat-value" id="sessionCount">0</div><div class="stat-sub">Completed or stopped sessions</div></article></div>
+        <article class="panel analytics-chart-panel"><div class="panel-heading"><div><div class="eyebrow">DAY BY DAY</div><h3>Daily study time</h3></div><div class="segmented"><button class="range-btn active" data-range="7">7 days</button><button class="range-btn" data-range="14">14 days</button><button class="range-btn" data-range="30">30 days</button></div></div><div id="analyticsChart" class="bar-chart large-chart"></div></article>
+        <div class="content-grid analytics-bottom"><article class="panel"><div class="panel-heading"><div><div class="eyebrow">SUBJECT BREAKDOWN</div><h3>Where you’ve invested time</h3></div></div><div id="subjectBreakdown" class="subject-list"></div></article><article class="panel"><div class="panel-heading"><div><div class="eyebrow">RECENT RECORD</div><h3>Latest study sessions</h3></div></div><div id="allSessions" class="recent-list"></div></article></div>
+      </section>
+
+      <section class="page" id="page-subjects">
+        <div class="page-intro"><div><div class="eyebrow">MAKE IT YOUR OWN</div><h2>Your subjects</h2><p>Add, rename, or remove subjects to match your bar exam syllabus. Your recorded time stays attached to its subject.</p></div></div>
+        <div class="subjects-layout"><article class="panel"><div class="panel-heading"><div><div class="eyebrow">YOUR STUDY AREAS</div><h3>Manage subjects</h3></div><span class="subject-count" id="subjectCount">0 subjects</span></div><div id="manageSubjects" class="manage-subject-list"></div><form id="addSubjectForm" class="add-subject-form"><label for="newSubjectName">Add a subject</label><div><input id="newSubjectName" maxlength="50" placeholder="e.g. Evidence Law" required><button class="button button-dark" type="submit">+ Add subject</button></div><small>Choose short, clear names so your charts stay readable.</small></form></article><article class="panel subject-info"><div class="eyebrow">YOUR DATA, YOUR DEVICE</div><h3>Keep your record honest.</h3><p>Study time is saved in this browser on this device using local storage. It is not uploaded to a server.</p><div class="info-line"><span>✓</span><p>Pomodoro and stopwatch time is added to the selected subject.</p></div><div class="info-line"><span>✓</span><p>Pausing, resetting, or finishing a timer saves the time studied so far.</p></div><div class="info-line"><span>✓</span><p>Refresh the page without losing saved study records.</p></div><button class="button button-outline full-width" id="exportBtn">↓ Export my study data (JSON)</button></article></div>
+      </section>
+
+      <footer class="footer"><span>BARREADY <b>§</b> YOUR FOCUS, YOUR FUTURE.</span><span>Made for the work behind the result.</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
